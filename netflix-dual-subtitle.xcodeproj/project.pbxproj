@@ -1,0 +1,733 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		52F613C22D116DC3001EB828 /* netflix-dual-subtitle Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 52F613C12D116DC3001EB828 /* netflix-dual-subtitle Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		52F613AC2D116DC3001EB828 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 52F613872D116DC1001EB828 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 52F6138E2D116DC1001EB828;
+			remoteInfo = "netflix-dual-subtitle";
+		};
+		52F613B62D116DC3001EB828 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 52F613872D116DC1001EB828 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 52F6138E2D116DC1001EB828;
+			remoteInfo = "netflix-dual-subtitle";
+		};
+		52F613C32D116DC3001EB828 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 52F613872D116DC1001EB828 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 52F613C02D116DC3001EB828;
+			remoteInfo = "netflix-dual-subtitle Extension";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		52F613DA2D116DC3001EB828 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				52F613C22D116DC3001EB828 /* netflix-dual-subtitle Extension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		52F6138F2D116DC1001EB828 /* netflix-dual-subtitle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "netflix-dual-subtitle.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		52F613AB2D116DC3001EB828 /* netflix-dual-subtitleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "netflix-dual-subtitleTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		52F613B52D116DC3001EB828 /* netflix-dual-subtitleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "netflix-dual-subtitleUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		52F613C12D116DC3001EB828 /* netflix-dual-subtitle Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "netflix-dual-subtitle Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		52F613D42D116DC3001EB828 /* Exceptions for "netflix-dual-subtitle Extension" folder in "netflix-dual-subtitle Extension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 52F613C02D116DC3001EB828 /* netflix-dual-subtitle Extension */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		52F613912D116DC1001EB828 /* netflix-dual-subtitle */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "netflix-dual-subtitle";
+			sourceTree = "<group>";
+		};
+		52F613AE2D116DC3001EB828 /* netflix-dual-subtitleTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "netflix-dual-subtitleTests";
+			sourceTree = "<group>";
+		};
+		52F613B82D116DC3001EB828 /* netflix-dual-subtitleUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "netflix-dual-subtitleUITests";
+			sourceTree = "<group>";
+		};
+		52F613C52D116DC3001EB828 /* netflix-dual-subtitle Extension */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				52F613D42D116DC3001EB828 /* Exceptions for "netflix-dual-subtitle Extension" folder in "netflix-dual-subtitle Extension" target */,
+			);
+			path = "netflix-dual-subtitle Extension";
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		52F6138C2D116DC1001EB828 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		52F613A82D116DC3001EB828 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		52F613B22D116DC3001EB828 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		52F613BE2D116DC3001EB828 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		52F613862D116DC1001EB828 = {
+			isa = PBXGroup;
+			children = (
+				52F613912D116DC1001EB828 /* netflix-dual-subtitle */,
+				52F613AE2D116DC3001EB828 /* netflix-dual-subtitleTests */,
+				52F613B82D116DC3001EB828 /* netflix-dual-subtitleUITests */,
+				52F613C52D116DC3001EB828 /* netflix-dual-subtitle Extension */,
+				52F613902D116DC1001EB828 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		52F613902D116DC1001EB828 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				52F6138F2D116DC1001EB828 /* netflix-dual-subtitle.app */,
+				52F613AB2D116DC3001EB828 /* netflix-dual-subtitleTests.xctest */,
+				52F613B52D116DC3001EB828 /* netflix-dual-subtitleUITests.xctest */,
+				52F613C12D116DC3001EB828 /* netflix-dual-subtitle Extension.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		52F6138E2D116DC1001EB828 /* netflix-dual-subtitle */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 52F613DB2D116DC3001EB828 /* Build configuration list for PBXNativeTarget "netflix-dual-subtitle" */;
+			buildPhases = (
+				52F6138B2D116DC1001EB828 /* Sources */,
+				52F6138C2D116DC1001EB828 /* Frameworks */,
+				52F6138D2D116DC1001EB828 /* Resources */,
+				52F613DA2D116DC3001EB828 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				52F613C42D116DC3001EB828 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				52F613912D116DC1001EB828 /* netflix-dual-subtitle */,
+			);
+			name = "netflix-dual-subtitle";
+			packageProductDependencies = (
+			);
+			productName = "netflix-dual-subtitle";
+			productReference = 52F6138F2D116DC1001EB828 /* netflix-dual-subtitle.app */;
+			productType = "com.apple.product-type.application";
+		};
+		52F613AA2D116DC3001EB828 /* netflix-dual-subtitleTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 52F613DE2D116DC3001EB828 /* Build configuration list for PBXNativeTarget "netflix-dual-subtitleTests" */;
+			buildPhases = (
+				52F613A72D116DC3001EB828 /* Sources */,
+				52F613A82D116DC3001EB828 /* Frameworks */,
+				52F613A92D116DC3001EB828 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				52F613AD2D116DC3001EB828 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				52F613AE2D116DC3001EB828 /* netflix-dual-subtitleTests */,
+			);
+			name = "netflix-dual-subtitleTests";
+			packageProductDependencies = (
+			);
+			productName = "netflix-dual-subtitleTests";
+			productReference = 52F613AB2D116DC3001EB828 /* netflix-dual-subtitleTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		52F613B42D116DC3001EB828 /* netflix-dual-subtitleUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 52F613E12D116DC3001EB828 /* Build configuration list for PBXNativeTarget "netflix-dual-subtitleUITests" */;
+			buildPhases = (
+				52F613B12D116DC3001EB828 /* Sources */,
+				52F613B22D116DC3001EB828 /* Frameworks */,
+				52F613B32D116DC3001EB828 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				52F613B72D116DC3001EB828 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				52F613B82D116DC3001EB828 /* netflix-dual-subtitleUITests */,
+			);
+			name = "netflix-dual-subtitleUITests";
+			packageProductDependencies = (
+			);
+			productName = "netflix-dual-subtitleUITests";
+			productReference = 52F613B52D116DC3001EB828 /* netflix-dual-subtitleUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		52F613C02D116DC3001EB828 /* netflix-dual-subtitle Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 52F613D52D116DC3001EB828 /* Build configuration list for PBXNativeTarget "netflix-dual-subtitle Extension" */;
+			buildPhases = (
+				52F613BD2D116DC3001EB828 /* Sources */,
+				52F613BE2D116DC3001EB828 /* Frameworks */,
+				52F613BF2D116DC3001EB828 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				52F613C52D116DC3001EB828 /* netflix-dual-subtitle Extension */,
+			);
+			name = "netflix-dual-subtitle Extension";
+			packageProductDependencies = (
+			);
+			productName = "netflix-dual-subtitle Extension";
+			productReference = 52F613C12D116DC3001EB828 /* netflix-dual-subtitle Extension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		52F613872D116DC1001EB828 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1620;
+				LastUpgradeCheck = 1620;
+				TargetAttributes = {
+					52F6138E2D116DC1001EB828 = {
+						CreatedOnToolsVersion = 16.2;
+					};
+					52F613AA2D116DC3001EB828 = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = 52F6138E2D116DC1001EB828;
+					};
+					52F613B42D116DC3001EB828 = {
+						CreatedOnToolsVersion = 16.2;
+						TestTargetID = 52F6138E2D116DC1001EB828;
+					};
+					52F613C02D116DC3001EB828 = {
+						CreatedOnToolsVersion = 16.2;
+					};
+				};
+			};
+			buildConfigurationList = 52F6138A2D116DC1001EB828 /* Build configuration list for PBXProject "netflix-dual-subtitle" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 52F613862D116DC1001EB828;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 52F613902D116DC1001EB828 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				52F6138E2D116DC1001EB828 /* netflix-dual-subtitle */,
+				52F613AA2D116DC3001EB828 /* netflix-dual-subtitleTests */,
+				52F613B42D116DC3001EB828 /* netflix-dual-subtitleUITests */,
+				52F613C02D116DC3001EB828 /* netflix-dual-subtitle Extension */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		52F6138D2D116DC1001EB828 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		52F613A92D116DC3001EB828 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		52F613B32D116DC3001EB828 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		52F613BF2D116DC3001EB828 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		52F6138B2D116DC1001EB828 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		52F613A72D116DC3001EB828 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		52F613B12D116DC3001EB828 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		52F613BD2D116DC3001EB828 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		52F613AD2D116DC3001EB828 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 52F6138E2D116DC1001EB828 /* netflix-dual-subtitle */;
+			targetProxy = 52F613AC2D116DC3001EB828 /* PBXContainerItemProxy */;
+		};
+		52F613B72D116DC3001EB828 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 52F6138E2D116DC1001EB828 /* netflix-dual-subtitle */;
+			targetProxy = 52F613B62D116DC3001EB828 /* PBXContainerItemProxy */;
+		};
+		52F613C42D116DC3001EB828 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 52F613C02D116DC3001EB828 /* netflix-dual-subtitle Extension */;
+			targetProxy = 52F613C32D116DC3001EB828 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		52F613D62D116DC3001EB828 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "netflix-dual-subtitle Extension/netflix_dual_subtitle_Extension.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "netflix-dual-subtitle Extension/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "netflix-dual-subtitle Extension";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "mourud.com.netflix-dual-subtitle.Extension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		52F613D72D116DC3001EB828 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "netflix-dual-subtitle Extension/netflix_dual_subtitle_Extension.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "netflix-dual-subtitle Extension/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "netflix-dual-subtitle Extension";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "mourud.com.netflix-dual-subtitle.Extension";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		52F613D82D116DC3001EB828 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		52F613D92D116DC3001EB828 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		52F613DC2D116DC3001EB828 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "netflix-dual-subtitle/netflix-dual-subtitle.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "netflix-dual-subtitle";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+					"-framework",
+					WebKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "mourud.com.netflix-dual-subtitle";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		52F613DD2D116DC3001EB828 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "netflix-dual-subtitle/netflix-dual-subtitle.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "netflix-dual-subtitle";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+					"-framework",
+					WebKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "mourud.com.netflix-dual-subtitle";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		52F613DF2D116DC3001EB828 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "mourud.com.netflix-dual-subtitleTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/netflix-dual-subtitle.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/netflix-dual-subtitle";
+			};
+			name = Debug;
+		};
+		52F613E02D116DC3001EB828 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "mourud.com.netflix-dual-subtitleTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/netflix-dual-subtitle.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/netflix-dual-subtitle";
+			};
+			name = Release;
+		};
+		52F613E22D116DC3001EB828 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "mourud.com.netflix-dual-subtitleUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "netflix-dual-subtitle";
+			};
+			name = Debug;
+		};
+		52F613E32D116DC3001EB828 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "mourud.com.netflix-dual-subtitleUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "netflix-dual-subtitle";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		52F6138A2D116DC1001EB828 /* Build configuration list for PBXProject "netflix-dual-subtitle" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				52F613D82D116DC3001EB828 /* Debug */,
+				52F613D92D116DC3001EB828 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		52F613D52D116DC3001EB828 /* Build configuration list for PBXNativeTarget "netflix-dual-subtitle Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				52F613D62D116DC3001EB828 /* Debug */,
+				52F613D72D116DC3001EB828 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		52F613DB2D116DC3001EB828 /* Build configuration list for PBXNativeTarget "netflix-dual-subtitle" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				52F613DC2D116DC3001EB828 /* Debug */,
+				52F613DD2D116DC3001EB828 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		52F613DE2D116DC3001EB828 /* Build configuration list for PBXNativeTarget "netflix-dual-subtitleTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				52F613DF2D116DC3001EB828 /* Debug */,
+				52F613E02D116DC3001EB828 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		52F613E12D116DC3001EB828 /* Build configuration list for PBXNativeTarget "netflix-dual-subtitleUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				52F613E22D116DC3001EB828 /* Debug */,
+				52F613E32D116DC3001EB828 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 52F613872D116DC1001EB828 /* Project object */;
+}
