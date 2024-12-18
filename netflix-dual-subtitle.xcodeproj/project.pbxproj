@@ -71,16 +71,6 @@
 			path = "netflix-dual-subtitle";
 			sourceTree = "<group>";
 		};
-		52F613AE2D116DC3001EB828 /* netflix-dual-subtitleTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "netflix-dual-subtitleTests";
-			sourceTree = "<group>";
-		};
-		52F613B82D116DC3001EB828 /* netflix-dual-subtitleUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "netflix-dual-subtitleUITests";
-			sourceTree = "<group>";
-		};
 		52F613C52D116DC3001EB828 /* netflix-dual-subtitle Extension */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
@@ -127,8 +117,6 @@
 			isa = PBXGroup;
 			children = (
 				52F613912D116DC1001EB828 /* netflix-dual-subtitle */,
-				52F613AE2D116DC3001EB828 /* netflix-dual-subtitleTests */,
-				52F613B82D116DC3001EB828 /* netflix-dual-subtitleUITests */,
 				52F613C52D116DC3001EB828 /* netflix-dual-subtitle Extension */,
 				52F613902D116DC1001EB828 /* Products */,
 			);
@@ -185,9 +173,6 @@
 			dependencies = (
 				52F613AD2D116DC3001EB828 /* PBXTargetDependency */,
 			);
-			fileSystemSynchronizedGroups = (
-				52F613AE2D116DC3001EB828 /* netflix-dual-subtitleTests */,
-			);
 			name = "netflix-dual-subtitleTests";
 			packageProductDependencies = (
 			);
@@ -207,9 +192,6 @@
 			);
 			dependencies = (
 				52F613B72D116DC3001EB828 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				52F613B82D116DC3001EB828 /* netflix-dual-subtitleUITests */,
 			);
 			name = "netflix-dual-subtitleUITests";
 			packageProductDependencies = (
@@ -559,6 +541,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "netflix-dual-subtitle";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
@@ -593,6 +576,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "netflix-dual-subtitle";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				INFOPLIST_KEY_NSMainStoryboardFile = Main;
 				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
