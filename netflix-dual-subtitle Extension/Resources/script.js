@@ -1,6 +1,12 @@
+// TODO: Add OAuth2.0 for API key
+// TODO: Add language Selection feature
+// TODO: Consider performance optimization-
+// 1. Use a single API call for multiple translations
+// 2. Scope the Observer to a specific element
+
 async function translateText(text, from = "en", to = "fr") {
   const url =
-    "https://translation.googleapis.com/language/translate/v2?key={API_key}";
+    "https://translation.googleapis.com/language/translate/v2?key={API_KEY}";
   try {
     const response = await fetch(url, {
       method: "POST",
@@ -27,7 +33,7 @@ async function translateNestedText(element) {
     Array.from(element.childNodes).map(async (node) => {
       const br = document.createElement('br');
 
-      const textNode = await translateText(node.textContent);
+      const textNode = await translateText(node.textContent, "fr", "en");
       node.textContent = "";
       node.appendChild(br);
       node.appendChild(document.createTextNode(textNode));
