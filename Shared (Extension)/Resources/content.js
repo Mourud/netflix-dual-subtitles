@@ -16,7 +16,7 @@ browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
 async function translateText(text, from = "en", to = "fr") {
   const url =
-    "https://translation.googleapis.com/language/translate/v2?key=AIzaSyBkDmKeuZHyoLqRYQ6vs0ZazZgnv4GApiw";
+    "https://translation.googleapis.com/language/translate/v2?key={key}";
   try {
     const response = await fetch(url, {
       method: "POST",
