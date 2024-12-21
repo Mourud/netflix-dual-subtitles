@@ -26,21 +26,29 @@ async function translateText(text, from = "en", to = "fr") {
   }
 }
 
-async function translateNestedText(element) {
+async function translateNestedText(element, to, from) {
   console.log("Trying to translate");
-
-  await Promise.all(
-    Array.from(element.childNodes).map(async (node) => {
+  const texts = Array.from(element.childNodes)
+  let keepNextBr = false;
+  let translatedText;
+  for (const textNode of texts) {
+    console.log(textNode);
+    const originalText = textNode.textContent;
+    textNode.textContent = "";
+    if(keepNextBr) {
       const br = document.createElement("br");
-
-      const textNode = await translateText(node.textContent, "fr", "en");
-      node.textContent = "";
-      node.appendChild(br);
-      node.appendChild(document.createTextNode(textNode));
-      console.log("Translated text:", node.textContent);
-    })
-  );
-  return element;
+      textNode.appendChild(br);
+    }
+    if (originalText === "- " ) {
+      keepNextBr = false;
+      translatedText = originalText;
+    }else {
+      translatedText = await translateText(originalText, to, from);
+      keepNextBr = true;
+    }
+    
+    textNode.appendChild(document.createTextNode(translatedText));
+  }
 }
 
 let prevText;
@@ -58,7 +66,6 @@ async function runExtensionLogic() {
       console.log("Original text:", text);
       const container = og_div.querySelector("div");
       if (container) {
-        
         my_div_shell.style.display = "none";
         const clonetainer = container.cloneNode(true);
 
@@ -67,18 +74,15 @@ async function runExtensionLogic() {
         clonetainer.style.top = clonetainer.style.bottom;
         clonetainer.style.removeProperty("bottom");
         const spans = clonetainer.querySelector("span");
-        await translateNestedText(spans);
+        await translateNestedText(spans, "fr", "en");
         my_div_shell.style.display = "block";
 
+        const pos =
+          Math.floor(window.innerWidth / 2) -
+          Math.floor(clonetainer.offsetWidth / 2);
 
-        const pos = Math.floor (window.innerWidth / 2) -  Math.floor(clonetainer.offsetWidth / 2);
-        console.log(clonetainer.offsetWidth);
-        
         const pos_percent = (pos / window.innerWidth) * 100;
         clonetainer.style.left = `${pos_percent}%`;
-
-
-
       }
     }
   } else {
