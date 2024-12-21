@@ -1,12 +1,3 @@
-browser.runtime.sendMessage({ greeting: "hello" }).then((response) => {
-    console.log("Received response: ", response);
-});
-
-browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    console.log("Received request: ", request);
-});
-
-
 // TODO: Add OAuth2.0 for API key
 // TODO: Add language Selection feature
 // TODO: Consider performance optimization-
@@ -15,8 +6,7 @@ browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
 // TODO: Check CORS header for the API
 
 async function translateText(text, from = "en", to = "fr") {
-  const url =
-    "https://translation.googleapis.com/language/translate/v2?key={key}";
+  const url = `https://translation.googleapis.com/language/translate/v2?key=..`;
   try {
     const response = await fetch(url, {
       method: "POST",
@@ -41,7 +31,7 @@ async function translateNestedText(element) {
 
   await Promise.all(
     Array.from(element.childNodes).map(async (node) => {
-      const br = document.createElement('br');
+      const br = document.createElement("br");
 
       const textNode = await translateText(node.textContent, "fr", "en");
       node.textContent = "";
@@ -55,53 +45,63 @@ async function translateNestedText(element) {
 
 let prevText;
 async function runExtensionLogic() {
-  if (window.location.pathname.startsWith("/watch")) {
-    const og_div = document.querySelector(".player-timedtext");
-    const my_div_shell = document.querySelector(".nds-player-timedtext");
-    if (my_div_shell) {
-      text = og_div.textContent;
-      if (text !== prevText) {
-        if (text === "") {
-          my_div_shell.innerHTML = "";
-          return;
-        }
-        prevText = text;
-        console.log("Original text:", text);
-        const container = og_div.querySelector("div");
-        if (container) {
-          const clonetainer = container.cloneNode(true);
-          clonetainer.style.bottom = "88%";
-          const spans = clonetainer.querySelector("span");
-          await translateNestedText(spans);
-          my_div_shell.innerHTML = "";
-          my_div_shell.appendChild(clonetainer);
-        }
+  const og_div = document.querySelector(".player-timedtext");
+  const my_div_shell = document.querySelector(".nds-player-timedtext");
+  if (my_div_shell) {
+    text = og_div.textContent;
+    if (text !== prevText) {
+      if (text === "") {
+        my_div_shell.innerHTML = "";
+        return;
       }
-    } else {
-      if (og_div) {
-        const my_div_shell = document.createElement("div");
-        my_div_shell.className = "nds-player-timedtext";
-        parentDiv = og_div.parentElement;
-        parentDiv.insertBefore(my_div_shell, og_div.nextSibling);
+      prevText = text;
+      console.log("Original text:", text);
+      const container = og_div.querySelector("div");
+      if (container) {
+        
+        my_div_shell.style.display = "none";
+        const clonetainer = container.cloneNode(true);
+
+        my_div_shell.innerHTML = "";
+        my_div_shell.appendChild(clonetainer);
+        clonetainer.style.top = clonetainer.style.bottom;
+        clonetainer.style.removeProperty("bottom");
+        const spans = clonetainer.querySelector("span");
+        await translateNestedText(spans);
+        my_div_shell.style.display = "block";
+
+
+        const pos = Math.floor (window.innerWidth / 2) -  Math.floor(clonetainer.offsetWidth / 2);
+        console.log(clonetainer.offsetWidth);
+        
+        const pos_percent = (pos / window.innerWidth) * 100;
+        clonetainer.style.left = `${pos_percent}%`;
+
+
+
       }
+    }
+  } else {
+    if (og_div) {
+      const my_div_shell = document.createElement("div");
+      my_div_shell.className = "nds-player-timedtext";
+      parentDiv = og_div.parentElement;
+      parentDiv.insertBefore(my_div_shell, og_div.nextSibling);
     }
   }
 }
 
-document.addEventListener("DOMContentLoaded", function (event) {
-  // Run logic initially
-  console.log("Extension is loaded");
-  console.log(window.location.origin);
-//  console.log(gapi)
+// Run logic initially
+console.log("Extension is loaded");
+runExtensionLogic();
+// Observe DOM changes for dynamic navigation
+const observer = new MutationObserver(() => {
   runExtensionLogic();
-
-  // Observe DOM changes for dynamic navigation
-  const observer = new MutationObserver(() => {
-    runExtensionLogic();
-  });
-
-  observer.observe(document.body, { childList: true, subtree: true });
 });
+const subtitleContainer = document.querySelector(".player-timedtext");
+
+observer.observe(document.body, { childList: true, subtree: true });
+
 ////? Google API
 //function start() {
 //  // Initializes the client with the API key and the Translate API.
@@ -158,4 +158,3 @@ document.addEventListener("DOMContentLoaded", function (event) {
 //    });
 //  }
 //})();
-
