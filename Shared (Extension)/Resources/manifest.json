@@ -21,7 +21,8 @@
 
     "content_scripts": [{
         "js": [ "content.js" ],
-        "matches": [ "https://*.netflix.com/watch*" ]
+        "matches": [ "https://*.netflix.com/*" ],
+        "run_at": "document_end"
     }],
 
     "action": {
