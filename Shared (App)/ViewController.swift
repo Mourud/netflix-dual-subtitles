@@ -16,7 +16,7 @@ import SafariServices
 typealias PlatformViewController = NSViewController
 #endif
 
-let extensionBundleIdentifier = "mourud.com.netflix-subs-mp.Extension"
+let extensionBundleIdentifier = "mourud.com.netflix-dual-subtitles.Extension"
 
 class ViewController: PlatformViewController, WKNavigationDelegate, WKScriptMessageHandler {
 
