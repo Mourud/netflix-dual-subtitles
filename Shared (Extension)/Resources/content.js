@@ -1,5 +1,5 @@
 async function translateText(text, from = "en", to = "fr") {
-  const url = `https://translation.googleapis.com/language/translate/v2?key=..`;
+  const url = `https://translation.googleapis.com/language/translate/v2?key=`;
   try {
     const response = await fetch(url, {
       method: "POST",
@@ -64,8 +64,13 @@ async function runExtensionLogic() {
 
         my_div_shell.innerHTML = "";
         my_div_shell.appendChild(clonetainer);
-        clonetainer.style.top = clonetainer.style.bottom;
-        clonetainer.style.removeProperty("bottom");
+        if (clonetainer.style.top){
+          clonetainer.style.removeProperty("top");
+          clonetainer.style.bottom = "25%";
+        }else{
+          clonetainer.style.removeProperty("bottom");
+          clonetainer.style.top = "10%";
+        }
         const spans = clonetainer.querySelector("span");
         await translateNestedText(spans, "fr", "en");
         my_div_shell.style.display = "block";
