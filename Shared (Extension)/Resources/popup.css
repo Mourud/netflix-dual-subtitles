@@ -3,8 +3,8 @@
 }
 
 body {
-    width: 100px;
-    padding: 10px;
+/*    width: 100px;*/
+/*    padding: 10px;*/
 
     font-family: system-ui;
     text-align: center;
@@ -13,3 +13,8 @@ body {
 @media (prefers-color-scheme: dark) {
     /* Dark Mode styles go here. */
 }
+
+select {
+    width: 100%; /* Full width of the container */
+    height: auto; /* Adjust height dynamically based on the number of visible options */
+  }
