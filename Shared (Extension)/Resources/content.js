@@ -1,10 +1,3 @@
-// TODO: Add OAuth2.0 for API key
-// TODO: Add language Selection feature
-// TODO: Consider performance optimization-
-// 1. Use a single API call for multiple translations
-// 2. Scope the Observer to a specific element
-// TODO: Check CORS header for the API
-
 async function translateText(text, from = "en", to = "fr") {
   const url = `https://translation.googleapis.com/language/translate/v2?key=..`;
   try {
@@ -95,10 +88,8 @@ async function runExtensionLogic() {
   }
 }
 
-// Run logic initially
 console.log("Extension is loaded");
 runExtensionLogic();
-// Observe DOM changes for dynamic navigation
 const observer = new MutationObserver(() => {
   runExtensionLogic();
 });
@@ -106,59 +97,3 @@ const subtitleContainer = document.querySelector(".player-timedtext");
 
 observer.observe(document.body, { childList: true, subtree: true });
 
-////? Google API
-//function start() {
-//  // Initializes the client with the API key and the Translate API.
-//  gapi.client.init({
-//    'apiKey': 'YOUR_API_KEY',
-//    'discoveryDocs': ['https://www.googleapis.com/discovery/v1/apis/translate/v2/rest'],
-//  }).then(function() {
-//    // Executes an API request, and returns a Promise.
-//    // The method name `language.translations.list` comes from the API discovery.
-//    return gapi.client.language.translations.list({
-//      q: 'hello world',
-//      source: 'en',
-//      target: 'de',
-//    });
-//  }).then(function(response) {
-//    console.log(response.result.data.translations[0].translatedText);
-//  }, function(reason) {
-//    console.log('Error: ' + reason.result.error.message);
-//  });
-//};
-//
-//// Loads the JavaScript client library and invokes `start` afterwards.
-//gapi.load('client', start);
-//
-//
-//(function() {
-//  // Load the Google API script dynamically
-//  const script = document.createElement('script');
-//  script.src = "https://apis.google.com/js/api.js";
-//  script.onload = function() {
-//    // This function runs once the Google API script is loaded
-//    gapi.load('client', start);
-//  };
-//  document.head.appendChild(script);
-//
-//  // Define your start function
-//  function start() {
-//    // Initializes the client with the API key and the Translate API
-//    gapi.client.init({
-//      apiKey: 'YOUR_API_KEY',
-//      discoveryDocs: ['https://www.googleapis.com/discovery/v1/apis/translate/v2/rest'],
-//    }).then(function() {
-//      // Executes an API request, and returns a Promise
-//      // The method name `language.translations.list` comes from the API discovery
-//      return gapi.client.language.translations.list({
-//        q: 'hello world',
-//        source: 'en',
-//        target: 'de',
-//      });
-//    }).then(function(response) {
-//      console.log(response.result.data.translations[0].translatedText);
-//    }, function(reason) {
-//      console.log('Error: ' + reason.result.error.message);
-//    });
-//  }
-//})();
