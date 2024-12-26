@@ -92,6 +92,8 @@ async function runExtensionLogic() {
       my_div_shell.className = "nds-player-timedtext";
       parentDiv = og_div.parentElement;
       parentDiv.insertBefore(my_div_shell, og_div.nextSibling);
+      observer.disconnect();
+      observer.observe(og_div, { childList: true, subtree: true });
     }
   }
 }
@@ -101,7 +103,7 @@ runExtensionLogic();
 const observer = new MutationObserver(() => {
   runExtensionLogic();
 });
-const subtitleContainer = document.querySelector(".player-timedtext");
+
 
 observer.observe(document.body, { childList: true, subtree: true });
 
