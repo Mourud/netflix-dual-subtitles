@@ -196,7 +196,8 @@ const isoLangs = {
 
 
 async function fetchAvailableLanguages() {
-
+  const url =
+    `https://translation.googleapis.com/language/translate/v2/languages?key=${API_KEY}`;
   try {
     const response = await fetch(url, {
       method: "GET",
