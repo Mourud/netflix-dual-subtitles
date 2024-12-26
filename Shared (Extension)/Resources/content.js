@@ -1,24 +1,3 @@
-async function translateText(text, from = "en", to = "fr") {
-  const url = `https://translation.googleapis.com/language/translate/v2?key=${API_KEY}`;
-  try {
-    const response = await fetch(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        q: text,
-        source: from,
-        target: to,
-        format: "text",
-      }),
-    });
-    const res = await response.json();
-    return res.data.translations[0].translatedText;
-  } catch (err) {
-    console.error("Translation error:", err.message);
-    return null;
-  }
-}
-
 async function translateNestedText(element, to, from) {
   console.log("Trying to translate");
   const texts = Array.from(element.childNodes)
@@ -36,7 +15,12 @@ async function translateNestedText(element, to, from) {
       keepNextBr = false;
       translatedText = originalText;
     }else {
-      translatedText = await translateText(originalText, to, from);
+      const res = await browser.runtime.sendMessage({message: "translate", text: originalText});
+      if (res.error) {
+        console.error(res.error);
+        return;
+      }
+      translatedText = res.data;
       keepNextBr = true;
     }
     
@@ -45,6 +29,8 @@ async function translateNestedText(element, to, from) {
 }
 
 let prevText;
+
+
 async function runExtensionLogic() {
   const og_div = document.querySelector(".player-timedtext");
   const my_div_shell = document.querySelector(".nds-player-timedtext");
@@ -72,6 +58,11 @@ async function runExtensionLogic() {
           clonetainer.style.top = "10%";
         }
         const spans = clonetainer.querySelector("span");
+        const res = await browser.runtime.sendMessage({message: "translate", spans: spans});
+        if (res.error) {
+          console.error(res.error);
+          return;
+        }
         await translateNestedText(spans, "fr", "en");
         my_div_shell.style.display = "block";
 

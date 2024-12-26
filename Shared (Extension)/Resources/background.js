@@ -1,10 +1,39 @@
-browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    console.log("Received request: ", request);
+const res = await browser.runtime.onMessage.addListener(handleMessages);
+console.log(res);
+let selectedFromLang = "fr";
+let selectedToLang = "en";
 
-    if (request.greeting === "hello")
-        return Promise.resolve({ farewell: "goodbye" });
-});
+async function handleMessages(request, sender, sendResponse) {
+        console.log("Received request: ", request);
+        if (request.message === "translate") {
+            const translatedText = await translateText(request.text, selectedFromLang, selectedToLang);
+            return { data: translatedText, error: null };
+        }
+        if (request.to && request.from) {
+            selectedToLang = request.to;
+            selectedFromLang = request.from;
+            return { data: "success", error: null };
+        }
+}
 
-browser.runtime.sendMessage({ greeting: "hello from the backside" }).then((response) => {
-    console.log("Received response: ", response);
-});
+async function translateText(text, from, to) {
+    const url = `https://translation.googleapis.com/language/translate/v2?key=${API_KEY}`;
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          q: text,
+          source: from,
+          target: to,
+          format: "text",
+        }),
+      });
+      const res = await response.json();
+      return res.data.translations[0].translatedText;
+    } catch (err) {
+      console.error("Translation error:", err.message);
+      return null;
+    }
+  }
+  
