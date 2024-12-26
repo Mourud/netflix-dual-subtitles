@@ -241,6 +241,8 @@ function populateDropdown(dropdown, filter = "") {
 const languages = await fetchAvailableLanguages();
 const toElem = document.getElementById("languageDropdownT");
 const fromElem = document.getElementById("languageDropdownF");
+let selectedToLang = "en";
+let selectedFromLang = "fr";
 populateDropdown(toElem, "");
 populateDropdown(fromElem, "");
 
@@ -251,4 +253,17 @@ document.getElementById("searchBoxT").addEventListener("input", () => {
 document.getElementById("searchBoxF").addEventListener("input", () => {
   const searchInput = document.getElementById("searchBoxF").value.toLowerCase();
   populateDropdown(fromElem, searchInput);
+});
+toElem.addEventListener("change", async () => {
+  selectedToLang = toElem.value;
+  console.log(selectedToLang);
+  const res = await browser.runtime.sendMessage({message: "setLangs", to: selectedToLang, from: selectedFromLang });
+  console.log(res);
+
+});
+fromElem.addEventListener("change", async () => {
+  selectedFromLang = fromElem.value;
+  console.log(selectedFromLang);
+  const res = await browser.runtime.sendMessage({message: "setLangs", to: selectedToLang, from: selectedFromLang });
+  console.log(res);
 });

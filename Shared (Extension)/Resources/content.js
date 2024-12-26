@@ -1,4 +1,4 @@
-async function translateText(text, from = "en", to = "fr") {
+async function translateText(text, to, from) {
   const url = `https://translation.googleapis.com/language/translate/v2?key=${API_KEY}`;
   try {
     const response = await fetch(url, {
@@ -19,7 +19,7 @@ async function translateText(text, from = "en", to = "fr") {
   }
 }
 
-async function translateNestedText(element, to, from) {
+async function translateNestedText(element, langsPromise) {
   console.log("Trying to translate");
   const texts = Array.from(element.childNodes)
   let keepNextBr = false;
@@ -36,6 +36,8 @@ async function translateNestedText(element, to, from) {
       keepNextBr = false;
       translatedText = originalText;
     }else {
+      const { to, from } = await langsPromise;
+      console.log("Translating from", from, "to", to);
       translatedText = await translateText(originalText, to, from);
       keepNextBr = true;
     }
@@ -72,7 +74,8 @@ async function runExtensionLogic() {
           clonetainer.style.top = "10%";
         }
         const spans = clonetainer.querySelector("span");
-        await translateNestedText(spans, "fr", "en");
+        langsPromise = browser.runtime.sendMessage({message: "getLangs"});
+        await translateNestedText(spans, langsPromise);
         my_div_shell.style.display = "block";
 
         const pos =
