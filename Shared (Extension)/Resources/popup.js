@@ -222,21 +222,32 @@ function populateDropdown(dropdown, filter = "") {
     document.body.replaceChildren(errorElement);
     return;
   }
+  const selected = document.createElement("option");
+  selected.value = selectedToLang;
+  selected.textContent = isoLangs[selectedToLang];
+  dropdown.appendChild(selected);
   Object.entries(languages.data).forEach(([_, d]) => {
     const code = d.language;
     const lang = isoLangs[code];
-    if (lang.toLowerCase().includes(filter)) {
+    if (lang.toLowerCase().includes(filter) && code !== selectedToLang) {
       const option = document.createElement("option");
       option.value = code;
       option.textContent = lang;
       dropdown.appendChild(option);
     }
   });
+  dropdown.value = selectedToLang;
 }
 
 const languages = await fetchAvailableLanguages();
 const toElem = document.getElementById("languageDropdown");
-let selectedToLang = "en";
+const langObj = await browser.storage.local.get("to");
+let selectedToLang;
+if (langObj.to) {
+  selectedToLang = langObj.to;
+}else{
+  selectedToLang = "en";
+}
 populateDropdown(toElem, "");
 
 document.getElementById("searchBox").addEventListener("input", () => {
@@ -246,6 +257,7 @@ document.getElementById("searchBox").addEventListener("input", () => {
 
 toElem.addEventListener("change", async () => {
   browser.storage.local.set({to: toElem.value})
+  selectedToLang = toElem.value;
+  populateDropdown(toElem, "");
 });
 
-browser.storage.local.set({to: selectedToLang}).then(() => console.log("Default languages set"));
