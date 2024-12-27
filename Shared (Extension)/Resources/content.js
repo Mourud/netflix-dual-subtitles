@@ -20,28 +20,26 @@ async function translateText(text, to, from) {
 }
 
 async function translateNestedText(element, langsPromise) {
-  console.log("Trying to translate");
-  const texts = Array.from(element.childNodes)
+  const texts = Array.from(element.childNodes);
   let keepNextBr = false;
   let translatedText;
   for (const textNode of texts) {
-    console.log(textNode);
     const originalText = textNode.textContent;
     textNode.textContent = "";
-    if(keepNextBr) {
+    if (keepNextBr) {
       const br = document.createElement("br");
       textNode.appendChild(br);
     }
-    if (originalText === "- " ) {
+    if (originalText === "- ") {
       keepNextBr = false;
       translatedText = originalText;
-    }else {
+    } else {
       const { to, from } = await langsPromise;
       console.log("Translating from", from, "to", to);
       translatedText = await translateText(originalText, to, from);
       keepNextBr = true;
     }
-    
+
     textNode.appendChild(document.createTextNode(translatedText));
   }
 }
@@ -66,15 +64,15 @@ async function runExtensionLogic() {
 
         my_div_shell.innerHTML = "";
         my_div_shell.appendChild(clonetainer);
-        if (clonetainer.style.top){
+        if (clonetainer.style.top) {
           clonetainer.style.removeProperty("top");
           clonetainer.style.bottom = "25%";
-        }else{
+        } else {
           clonetainer.style.removeProperty("bottom");
           clonetainer.style.top = "10%";
         }
         const spans = clonetainer.querySelector("span");
-        langsPromise = browser.runtime.sendMessage({message: "getLangs"});
+        langsPromise = browser.runtime.sendMessage({ message: "getLangs" });
         await translateNestedText(spans, langsPromise);
         my_div_shell.style.display = "block";
 
@@ -104,6 +102,4 @@ const observer = new MutationObserver(() => {
   runExtensionLogic();
 });
 
-
 observer.observe(document.body, { childList: true, subtree: true });
-
