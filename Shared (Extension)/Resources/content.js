@@ -1,15 +1,18 @@
 async function translateText(text, to, from) {
   const url = `https://translation.googleapis.com/language/translate/v2?key=${API_KEY}`;
+  let body = {
+    q: text,
+    target: to,
+    format: "text",
+  }
+  if (from !== "auto") {
+    body.source = from;
+  }
   try {
     const response = await fetch(url, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        q: text,
-        source: from,
-        target: to,
-        format: "text",
-      }),
+      body: JSON.stringify(body),
     });
     const res = await response.json();
     return res.data.translations[0].translatedText;
@@ -19,7 +22,7 @@ async function translateText(text, to, from) {
   }
 }
 
-async function translateNestedText(element, langsPromise) {
+async function translateNestedText(element) {
   const texts = Array.from(element.childNodes);
   let keepNextBr = false;
   let translatedText;
@@ -34,7 +37,10 @@ async function translateNestedText(element, langsPromise) {
       keepNextBr = false;
       translatedText = originalText;
     } else {
-      const { to, from } = await langsPromise;
+
+      const langs = await browser.storage.local.get(["to", "from"]);
+      from = langs.from;
+      to = langs.to;
       console.log("Translating from", from, "to", to);
       translatedText = await translateText(originalText, to, from);
       keepNextBr = true;
@@ -72,8 +78,7 @@ async function runExtensionLogic() {
           clonetainer.style.top = "10%";
         }
         const spans = clonetainer.querySelector("span");
-        langsPromise = browser.runtime.sendMessage({ message: "getLangs" });
-        await translateNestedText(spans, langsPromise);
+        await translateNestedText(spans);
         my_div_shell.style.display = "block";
 
         const pos =

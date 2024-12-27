@@ -238,7 +238,7 @@ const languages = await fetchAvailableLanguages();
 const toElem = document.getElementById("languageDropdownT");
 const fromElem = document.getElementById("languageDropdownF");
 let selectedToLang = "en";
-let selectedFromLang = "fr";
+let selectedFromLang = "auto";
 populateDropdown(toElem, "");
 populateDropdown(fromElem, "");
 
@@ -251,22 +251,10 @@ document.getElementById("searchBoxF").addEventListener("input", () => {
   populateDropdown(fromElem, searchInput);
 });
 toElem.addEventListener("change", async () => {
-  selectedToLang = toElem.value;
-  console.log(selectedToLang);
-  const res = await browser.runtime.sendMessage({
-    message: "setLangs",
-    to: selectedToLang,
-    from: selectedFromLang,
-  });
-  console.log(res);
+  browser.storage.local.set({ to: toElem.value})
 });
 fromElem.addEventListener("change", async () => {
-  selectedFromLang = fromElem.value;
-  console.log(selectedFromLang);
-  const res = await browser.runtime.sendMessage({
-    message: "setLangs",
-    to: selectedToLang,
-    from: selectedFromLang,
-  });
-  console.log(res);
+  browser.storage.local.set({ to: fromElem.value });
 });
+
+browser.storage.local.set({ to: selectedToLang, from: selectedFromLang }).then(() => console.log("Default languages set"));
