@@ -235,26 +235,17 @@ function populateDropdown(dropdown, filter = "") {
 }
 
 const languages = await fetchAvailableLanguages();
-const toElem = document.getElementById("languageDropdownT");
-const fromElem = document.getElementById("languageDropdownF");
+const toElem = document.getElementById("languageDropdown");
 let selectedToLang = "en";
-let selectedFromLang = "auto";
 populateDropdown(toElem, "");
-populateDropdown(fromElem, "");
 
-document.getElementById("searchBoxT").addEventListener("input", () => {
-  const searchInput = document.getElementById("searchBoxT").value.toLowerCase();
+document.getElementById("searchBox").addEventListener("input", () => {
+  const searchInput = document.getElementById("searchBox").value.toLowerCase();
   populateDropdown(toElem, searchInput);
 });
-document.getElementById("searchBoxF").addEventListener("input", () => {
-  const searchInput = document.getElementById("searchBoxF").value.toLowerCase();
-  populateDropdown(fromElem, searchInput);
-});
+
 toElem.addEventListener("change", async () => {
-  browser.storage.local.set({ to: toElem.value})
-});
-fromElem.addEventListener("change", async () => {
-  browser.storage.local.set({ to: fromElem.value });
+  browser.storage.local.set({to: toElem.value})
 });
 
-browser.storage.local.set({ to: selectedToLang, from: selectedFromLang }).then(() => console.log("Default languages set"));
+browser.storage.local.set({to: selectedToLang}).then(() => console.log("Default languages set"));

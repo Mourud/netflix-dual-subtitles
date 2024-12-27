@@ -1,18 +1,15 @@
-async function translateText(text, to, from) {
+async function translateText(text, to) {
   const url = `https://translation.googleapis.com/language/translate/v2?key=${API_KEY}`;
-  let body = {
-    q: text,
-    target: to,
-    format: "text",
-  }
-  if (from !== "auto") {
-    body.source = from;
-  }
+
   try {
     const response = await fetch(url, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
+      body: JSON.stringify({
+        q: text,
+        target: to,
+        format: "text",
+      }),
     });
     const res = await response.json();
     return res.data.translations[0].translatedText;
@@ -38,10 +35,10 @@ async function translateNestedText(element) {
       translatedText = originalText;
     } else {
 
-      const langs = await browser.storage.local.get(["to", "from"]);
+      const langs = await browser.storage.local.get("to");
       from = langs.from;
       to = langs.to;
-      console.log("Translating from", from, "to", to);
+      console.log("Translating from to: ", to);
       translatedText = await translateText(originalText, to, from);
       keepNextBr = true;
     }
