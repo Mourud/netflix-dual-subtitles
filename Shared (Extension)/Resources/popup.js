@@ -239,6 +239,7 @@ function populateDropdown(dropdown, filter = "") {
   dropdown.value = selectedToLang;
 }
 
+const button = document.getElementById('toggleSwitch');
 const languages = await fetchAvailableLanguages();
 const toElem = document.getElementById("languageDropdown");
 const langObj = await browser.storage.local.get("to");
@@ -249,6 +250,16 @@ if (langObj.to) {
   selectedToLang = "en";
 }
 populateDropdown(toElem, "");
+
+initialState = await browser.storage.local.get("isChecked");
+if (initialState.isChecked) {
+  button.checked = initialState.isChecked;
+}else{
+  button.checked = false;
+  browser.storage.local.set({isChecked: false});
+}
+
+button.addEventListener('change', toggleSwitch);
 
 document.getElementById("searchBox").addEventListener("input", () => {
   const searchInput = document.getElementById("searchBox").value.toLowerCase();
@@ -267,16 +278,7 @@ toElem.addEventListener("change", async () => {
 
 function toggleSwitch() {
   const button = document.getElementById('toggleSwitch');
-  const isChecked = button.checked; 
-  const toggleText = document.getElementById('toggleText');
-  console.log(isChecked, toggleText, button);
-  if (isChecked) {
-    toggleText.textContent = "On";
-  }else{
-    toggleText.textContent = "Off";
-  }
-  browser.storage.local.set({isChecked: isChecked});
+  const isChecked = button.checked;
+  browser.storage.local.set({isChecked});
 }
-const button = document.getElementById('toggleSwitch');
-button.addEventListener('change', toggleSwitch);
-toggleSwitch();
+console.log(await browser.storage.local.get([null]));

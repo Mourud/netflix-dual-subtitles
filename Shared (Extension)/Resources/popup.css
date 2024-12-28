@@ -27,13 +27,10 @@ input {
 p {
     display: flex;
     align-items: center; /* Vertically aligns items */
-    justify-content: flex-start; /* Aligns items to the left */
+    justify-content: space-between;
   }
   
-  /* Optional: Add some spacing between text and toggle */
-  #toggleText {
-    margin-right: 10px;
-  }
+
 /* The switch - the box around the slider */
 .switch {
     position: relative;
