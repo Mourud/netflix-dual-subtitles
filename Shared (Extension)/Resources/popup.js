@@ -251,7 +251,7 @@ if (langObj.to) {
 }
 populateDropdown(toElem, "");
 
-initialState = await browser.storage.local.get("isChecked");
+const initialState = await browser.storage.local.get("isChecked");
 if (initialState.isChecked) {
   button.checked = initialState.isChecked;
 }else{

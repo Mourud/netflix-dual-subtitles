@@ -36,10 +36,9 @@ async function translateNestedText(element) {
     } else {
 
       const langs = await browser.storage.local.get("to");
-      from = langs.from;
       to = langs.to;
-      console.log("Translating from to: ", to);
-      translatedText = await translateText(originalText, to, from);
+      console.log("Translating to: ", to);
+      translatedText = await translateText(originalText, to);
       keepNextBr = true;
     }
 
@@ -102,4 +101,19 @@ const observer = new MutationObserver(() => {
   runExtensionLogic();
 });
 
-observer.observe(document.body, { childList: true, subtree: true });
+
+browser.storage.onChanged.addListener((changes, areaName) => {
+  const { isChecked } = changes;
+  const isEnabled = isChecked.newValue;
+  if (areaName === "local") {
+    if (isEnabled) {
+      observer.observe(document.body, { childList: true, subtree: true });
+    } else {
+      const my_div_shell = document.querySelector(".nds-player-timedtext");
+      if (my_div_shell) {
+        my_div_shell.innerHTML = "";
+      }
+      observer.disconnect();
+    }
+  }
+});
