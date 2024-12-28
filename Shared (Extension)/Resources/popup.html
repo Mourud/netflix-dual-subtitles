@@ -7,9 +7,19 @@
     <style></style>
   </head>
   <body>
-    <h2>Netflix Dual Subtitles</h2>
-    <p>Choose a language to display as a second subtitle</p>
-    <input type="text" id="searchBox" placeholder="Search for a language..." />
+    <h2 style="color: #e50914">Netflix Dual Subtitles</h2>
+    <p>
+      <span id="toggleText"></span>
+      <label class="switch">
+        <input id="toggleSwitch" type="checkbox" />
+        <span class="slider round"></span>
+      </label>
+    </p>
+    <input
+      type="text"
+      id="searchBox"
+      placeholder="Choose second language for subtitles ..."
+    />
     <select id="languageDropdown" size="5" width="100%"></select>
   </body>
 </html>

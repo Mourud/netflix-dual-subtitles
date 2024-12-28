@@ -224,7 +224,7 @@ function populateDropdown(dropdown, filter = "") {
   }
   const selected = document.createElement("option");
   selected.value = selectedToLang;
-  selected.textContent = isoLangs[selectedToLang];
+  selected.textContent = "✓ " + isoLangs[selectedToLang];
   dropdown.appendChild(selected);
   Object.entries(languages.data).forEach(([_, d]) => {
     const code = d.language;
@@ -258,6 +258,25 @@ document.getElementById("searchBox").addEventListener("input", () => {
 toElem.addEventListener("change", async () => {
   browser.storage.local.set({to: toElem.value})
   selectedToLang = toElem.value;
+  const searchBox = document.getElementById("searchBox");
+  searchBox.value = "";
   populateDropdown(toElem, "");
+  
 });
 
+
+function toggleSwitch() {
+  const button = document.getElementById('toggleSwitch');
+  const isChecked = button.checked; 
+  const toggleText = document.getElementById('toggleText');
+  console.log(isChecked, toggleText, button);
+  if (isChecked) {
+    toggleText.textContent = "On";
+  }else{
+    toggleText.textContent = "Off";
+  }
+  browser.storage.local.set({isChecked: isChecked});
+}
+const button = document.getElementById('toggleSwitch');
+button.addEventListener('change', toggleSwitch);
+toggleSwitch();
