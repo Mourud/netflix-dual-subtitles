@@ -34,11 +34,15 @@ async function translateNestedText(element) {
       keepNextBr = false;
       translatedText = originalText;
     } else {
-
       const langs = await browser.storage.local.get("to");
       to = langs.to;
       console.log("Translating to: ", to);
-      translatedText = await translateText(originalText, to);
+      const res = await browser.runtime.sendMessage({message: "translate", text: originalText});
+      if (res.error) {
+        console.error(res.error);
+        return;
+      }
+      translatedText = res.data;
       keepNextBr = true;
     }
 
@@ -48,6 +52,9 @@ async function translateNestedText(element) {
 
 let prevText;
 async function runExtensionLogic() {
+  const translateresponse = await browser.runtime.sendMessage({message: "translate", text: "originalText"});
+  console.log("Received sendMessage response:", translateresponse);
+
   const og_div = document.querySelector(".player-timedtext");
   const my_div_shell = document.querySelector(".nds-player-timedtext");
   if (my_div_shell) {
@@ -100,7 +107,6 @@ runExtensionLogic();
 const observer = new MutationObserver(() => {
   runExtensionLogic();
 });
-
 
 browser.storage.onChanged.addListener((changes, areaName) => {
   const { isChecked } = changes;

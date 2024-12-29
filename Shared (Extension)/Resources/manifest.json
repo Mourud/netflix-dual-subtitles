@@ -30,5 +30,5 @@
         "default_icon": "images/toolbar-icon.svg"
     },
 
-    "permissions": [ "storage" ]
+    "permissions": [ "storage", "nativeMessaging"]
 }

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		525905052D2149E500964829 /* Translation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 525905042D2149E400964829 /* Translation.framework */; };
+		525905072D214AB200964829 /* Translation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 525905062D214AB200964829 /* Translation.framework */; };
 		528ACB572D163252008D358C /* netflix-double-subtitles Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 528ACB562D163252008D358C /* netflix-double-subtitles Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		528ACB612D163252008D358C /* netflix-double-subtitles Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 528ACB602D163252008D358C /* netflix-double-subtitles Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
@@ -54,6 +56,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		525905042D2149E400964829 /* Translation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Translation.framework; path = System/Library/Frameworks/Translation.framework; sourceTree = SDKROOT; };
+		525905062D214AB200964829 /* Translation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Translation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.2.sdk/System/Library/Frameworks/Translation.framework; sourceTree = DEVELOPER_DIR; };
 		528ACB382D163252008D358C /* netflix-double-subtitles.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "netflix-double-subtitles.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		528ACB4A2D163252008D358C /* netflix-double-subtitles.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "netflix-double-subtitles.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		528ACB562D163252008D358C /* netflix-double-subtitles Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "netflix-double-subtitles Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -211,6 +215,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				525905072D214AB200964829 /* Translation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -218,12 +223,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				525905052D2149E500964829 /* Translation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		525905032D2149E400964829 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				525905062D214AB200964829 /* Translation.framework */,
+				525905042D2149E400964829 /* Translation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		528ACB1B2D16324F008D358C = {
 			isa = PBXGroup;
 			children = (
@@ -233,6 +248,7 @@
 				528ACB4B2D163252008D358C /* macOS (App) */,
 				528ACB5A2D163252008D358C /* iOS (Extension) */,
 				528ACB642D163252008D358C /* macOS (Extension) */,
+				525905032D2149E400964829 /* Frameworks */,
 				528ACB392D163252008D358C /* Products */,
 			);
 			sourceTree = "<group>";
