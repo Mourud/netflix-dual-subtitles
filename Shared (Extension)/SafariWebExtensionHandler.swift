@@ -7,8 +7,22 @@
 
 import SafariServices
 import os.log
+import Translation
+import Foundation
 
+
+
+@available(macOSApplicationExtension 15.0, *)
 class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
+  var session = TranslationSession()
+  { session in
+                         do {
+                               let response = try await session.translate(sourceText)
+                               targetText = response.targetText
+                           } catch {
+                                 // Handle error.
+                             }
+  }
 
     func beginRequest(with context: NSExtensionContext) {
         let request = context.inputItems.first as? NSExtensionItem

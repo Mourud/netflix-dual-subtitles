@@ -37,12 +37,13 @@ async function translateNestedText(element) {
       const langs = await browser.storage.local.get("to");
       to = langs.to;
       console.log("Translating to: ", to);
-      const res = await browser.runtime.sendMessage({message: "translate", text: originalText});
-      if (res.error) {
-        console.error(res.error);
-        return;
-      }
-      translatedText = res.data;
+      // const res = await browser.runtime.sendMessage({message: "translate", text: originalText});
+      // if (res.error) {
+      //   console.error(res.error);
+      //   return;
+      // }
+      // translatedText = res.data;
+      translatedText = await translateText(originalText, to);
       keepNextBr = true;
     }
 
@@ -52,8 +53,8 @@ async function translateNestedText(element) {
 
 let prevText;
 async function runExtensionLogic() {
-  const translateresponse = await browser.runtime.sendMessage({message: "translate", text: "originalText"});
-  console.log("Received sendMessage response:", translateresponse);
+  // const translateresponse = await browser.runtime.sendMessage({message: "translate", text: "originalText"});
+  // console.log("Received sendMessage response:", translateresponse);
 
   const og_div = document.querySelector(".player-timedtext");
   const my_div_shell = document.querySelector(".nds-player-timedtext");
