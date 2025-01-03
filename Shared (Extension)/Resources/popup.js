@@ -239,46 +239,85 @@ function populateDropdown(dropdown, filter = "") {
   dropdown.value = selectedToLang;
 }
 
-const button = document.getElementById('toggleSwitch');
-const languages = await fetchAvailableLanguages();
+const toggleButton = document.getElementById("toggleSwitch");
+const apiKeySubmitButton = document.getElementById("submitButton");
+console.log(apiKeySubmitButton);
+console.log("hi")
+// const languages = await fetchAvailableLanguages();
 const toElem = document.getElementById("languageDropdown");
 const langObj = await browser.storage.local.get("to");
 let selectedToLang;
 if (langObj.to) {
   selectedToLang = langObj.to;
-}else{
+} else {
   selectedToLang = "en";
 }
 populateDropdown(toElem, "");
 
 const initialState = await browser.storage.local.get("isChecked");
 if (initialState.isChecked) {
-  button.checked = initialState.isChecked;
-}else{
-  button.checked = false;
-  browser.storage.local.set({isChecked: false});
+  toggleButton.checked = initialState.isChecked;
+} else {
+  toggleButton.checked = false;
+  browser.storage.local.set({ isChecked: false });
 }
+let API_KEY = await browser.storage.local.get("api_key");
+console.log("Reached here");
+const mainContainer = document.querySelector("main");
+const apiContainer = document.getElementById("apiContainer");
+if (API_KEY) {
+  mainContainer.style.display = "block";
+  apiContainer.style.display = "none"; 
+} else {
+  mainContainer.style.display = "none";
+  apiContainer.style
+  .display = "flex";
+}
+console.log("Reached here");
 
-button.addEventListener('change', toggleSwitch);
+
+toggleButton.addEventListener("change", toggleSwitch);
+apiKeySubmitButton.addEventListener("click", async () => {
+  console.log("clicked");
+  const apiKey = document.getElementById("apiKey").value;
+  if (apiKey) {
+    API_KEY = apiKey;
+    const url = `https://translation.googleapis.com/language/translate/v2?key=${API_KEY}`;
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          q: "",
+          target: "en",
+        }),
+      });
+      console.log(response);
+    } catch (err) {
+      console.error("Translation error:", err.message);
+    }
+  }});
 
 document.getElementById("searchBox").addEventListener("input", () => {
-  const searchInput = document.getElementById("searchBox").value.toLowerCase();
+  const searchInput = document
+    .getElementById("searchBox")
+    .value.toLowerCase();
   populateDropdown(toElem, searchInput);
 });
 
 toElem.addEventListener("change", async () => {
-  browser.storage.local.set({to: toElem.value})
+  browser.storage.local.set({ to: toElem.value });
   selectedToLang = toElem.value;
   const searchBox = document.getElementById("searchBox");
   searchBox.value = "";
   populateDropdown(toElem, "");
-  
 });
 
 
 function toggleSwitch() {
-  const button = document.getElementById('toggleSwitch');
+  const button = document.getElementById("toggleSwitch");
   const isChecked = button.checked;
-  browser.storage.local.set({isChecked});
+  browser.storage.local.set({ isChecked });
 }
-console.log(await browser.storage.local.get([null]));
+
+
