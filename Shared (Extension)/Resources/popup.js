@@ -239,6 +239,23 @@ function populateDropdown(dropdown, filter = "") {
   dropdown.value = selectedToLang;
 }
 
+function toggleSwitch() {
+  const button = document.getElementById('toggleSwitch');
+  const isChecked = button.checked;
+  browser.storage.local.set({isChecked});
+}
+
+
+
+
+
+
+
+
+
+
+
+
 const button = document.getElementById('toggleSwitch');
 const languages = await fetchAvailableLanguages();
 const toElem = document.getElementById("languageDropdown");
@@ -276,9 +293,5 @@ toElem.addEventListener("change", async () => {
 });
 
 
-function toggleSwitch() {
-  const button = document.getElementById('toggleSwitch');
-  const isChecked = button.checked;
-  browser.storage.local.set({isChecked});
-}
+
 console.log(await browser.storage.local.get([null]));
