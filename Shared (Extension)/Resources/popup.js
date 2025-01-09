@@ -194,7 +194,7 @@ const isoLangs = {
   zu: "Zulu",
 };
 
-async function fetchAvailableLanguages() {
+async function fetchAvailableLanguages(API_KEY) {
   const url = `https://translation.googleapis.com/language/translate/v2/languages?key=${API_KEY}`;
   try {
     const response = await fetch(url, {
@@ -214,7 +214,7 @@ function createErrorElement(error) {
   return errorElement;
 }
 
-function populateDropdown(dropdown, filter = "") {
+function populateDropdown(dropdown, filter = "", languages) {
   dropdown.innerHTML = "";
   if (languages.error) {
     console.error(languages.error);
@@ -239,11 +239,30 @@ function populateDropdown(dropdown, filter = "") {
   dropdown.value = selectedToLang;
 }
 
+
+
+
+
+
+
+
+
+
 const toggleButton = document.getElementById("toggleSwitch");
 const apiKeySubmitButton = document.getElementById("submitButton");
-console.log(apiKeySubmitButton);
-console.log("hi")
-// const languages = await fetchAvailableLanguages();
+const apiContainer = document.getElementById("apiContainer");
+const mainContainer = document.getElementById("mainContainer");
+let API_KEY;
+console.log("adding event listener");
+apiKeySubmitButton.addEventListener("click", async () => {
+  console.log("clicked");
+  API_KEY = document.getElementById("apiInput").value;
+  apiContainer.style.display = "none";
+  mainContainer.style.display = "block";
+});
+
+
+// const languages = await fetchAvailableLanguages(API_KEY);
 const toElem = document.getElementById("languageDropdown");
 const langObj = await browser.storage.local.get("to");
 let selectedToLang;
@@ -261,19 +280,19 @@ if (initialState.isChecked) {
   toggleButton.checked = false;
   browser.storage.local.set({ isChecked: false });
 }
-let API_KEY = await browser.storage.local.get("api_key");
-console.log("Reached here");
-const mainContainer = document.querySelector("main");
-const apiContainer = document.getElementById("apiContainer");
-if (API_KEY) {
-  mainContainer.style.display = "block";
-  apiContainer.style.display = "none"; 
-} else {
-  mainContainer.style.display = "none";
-  apiContainer.style
-  .display = "flex";
-}
-console.log("Reached here");
+// let API_KEY = await browser.storage.local.get("api_key");
+// console.log("Reached here");
+// const mainContainer = document.querySelector("main");
+// const apiContainer = document.getElementById("apiContainer");
+// if (API_KEY) {
+//   mainContainer.style.display = "block";
+//   apiContainer.style.display = "none"; 
+// } else {
+//   mainContainer.style.display = "none";
+//   apiContainer.style
+//   .display = "flex";
+// }
+// console.log("Reached here");
 
 
 toggleButton.addEventListener("change", toggleSwitch);
@@ -302,7 +321,7 @@ document.getElementById("searchBox").addEventListener("input", () => {
   const searchInput = document
     .getElementById("searchBox")
     .value.toLowerCase();
-  populateDropdown(toElem, searchInput);
+  populateDropdown(toElem, searchInput, languages);
 });
 
 toElem.addEventListener("change", async () => {
@@ -310,7 +329,7 @@ toElem.addEventListener("change", async () => {
   selectedToLang = toElem.value;
   const searchBox = document.getElementById("searchBox");
   searchBox.value = "";
-  populateDropdown(toElem, "");
+  populateDropdown(toElem, "", languages);
 });
 
 
