@@ -193,7 +193,7 @@ const isoLangs = {
   "zh-TW": "Traditional Chinese",
   zu: "Zulu",
 };
-
+// TODO: Function needs to be double checked
 async function fetchAvailableLanguages(API_KEY) {
   const url = `https://translation.googleapis.com/language/translate/v2/languages?key=${API_KEY}`;
   try {
@@ -202,7 +202,7 @@ async function fetchAvailableLanguages(API_KEY) {
       headers: { "Content-Type": "application/json" },
     });
     const res = await response.json();
-    return { data: res.data.languages, error: null };
+    return { data: res, error: null };
   } catch (error) {
     return { data: null, error: error.message };
   }
@@ -226,7 +226,8 @@ function populateDropdown(dropdown, filter = "", languages) {
   selected.value = selectedToLang;
   selected.textContent = "✓ " + isoLangs[selectedToLang];
   dropdown.appendChild(selected);
-  Object.entries(languages.data).forEach(([_, d]) => {
+
+  Object.entries(languages.data.languages).forEach(([_, d]) => {
     const code = d.language;
     const lang = isoLangs[code];
     if (lang.toLowerCase().includes(filter) && code !== selectedToLang) {
@@ -239,104 +240,92 @@ function populateDropdown(dropdown, filter = "", languages) {
   dropdown.value = selectedToLang;
 }
 
+async function setupPopup(languages) {
+  apiContainer.style.display = "none";
+  mainContainer.style.display = "block";
+  const toggleButton = document.getElementById("toggleSwitch");
+  const toElem = document.getElementById("languageDropdown");
 
+  populateDropdown(toElem, "", languages);
 
+  const initialState = await browser.storage.local.get("isChecked");
+  if (initialState.isChecked) {
+    toggleButton.checked = initialState.isChecked;
+  } else {
+    toggleButton.checked = false;
+    browser.storage.local.set({ isChecked: false });
+  }
 
+  toggleButton.addEventListener("change", () => {
+    const button = document.getElementById("toggleSwitch");
+    const isChecked = button.checked;
+    browser.storage.local.set({ isChecked });
+  });
 
+  document.getElementById("searchBox").addEventListener("input", () => {
+    const searchInput = document
+      .getElementById("searchBox")
+      .value.toLowerCase();
+    populateDropdown(toElem, searchInput, languages);
+  });
 
-
-
-
+  toElem.addEventListener("change", async () => {
+    browser.storage.local.set({ to: toElem.value });
+    selectedToLang = toElem.value;
+    const searchBox = document.getElementById("searchBox");
+    searchBox.value = "";
+    populateDropdown(toElem, "", languages);
+  });
+}
 
 const toggleButton = document.getElementById("toggleSwitch");
 const apiKeySubmitButton = document.getElementById("submitButton");
 const apiContainer = document.getElementById("apiContainer");
 const mainContainer = document.getElementById("mainContainer");
-let API_KEY;
-console.log("adding event listener");
-apiKeySubmitButton.addEventListener("click", async () => {
-  console.log("clicked");
-  API_KEY = document.getElementById("apiInput").value;
-  apiContainer.style.display = "none";
-  mainContainer.style.display = "block";
-});
+const apiInput = document.getElementById("apiInput");
+let languages;
 
-
-// const languages = await fetchAvailableLanguages(API_KEY);
-const toElem = document.getElementById("languageDropdown");
 const langObj = await browser.storage.local.get("to");
+
 let selectedToLang;
 if (langObj.to) {
   selectedToLang = langObj.to;
 } else {
   selectedToLang = "en";
 }
-populateDropdown(toElem, "");
 
-const initialState = await browser.storage.local.get("isChecked");
-if (initialState.isChecked) {
-  toggleButton.checked = initialState.isChecked;
-} else {
-  toggleButton.checked = false;
-  browser.storage.local.set({ isChecked: false });
+let API_KEY = (await browser.storage.local.get("apiKey")).apiKey;
+console.log("API_KEY", API_KEY);
+if (API_KEY) {
+  apiContainer.style.display = "none";
+  mainContainer.style.display = "block";
+  const languages = (await fetchAvailableLanguages(API_KEY)).data;
+  setupPopup(languages);
+}else{
+  apiContainer.style.display = "flex";
+  mainContainer.style.display = "none";
 }
-// let API_KEY = await browser.storage.local.get("api_key");
-// console.log("Reached here");
-// const mainContainer = document.querySelector("main");
-// const apiContainer = document.getElementById("apiContainer");
-// if (API_KEY) {
-//   mainContainer.style.display = "block";
-//   apiContainer.style.display = "none"; 
-// } else {
-//   mainContainer.style.display = "none";
-//   apiContainer.style
-//   .display = "flex";
-// }
-// console.log("Reached here");
 
-
-toggleButton.addEventListener("change", toggleSwitch);
 apiKeySubmitButton.addEventListener("click", async () => {
-  console.log("clicked");
-  const apiKey = document.getElementById("apiKey").value;
-  if (apiKey) {
-    API_KEY = apiKey;
-    const url = `https://translation.googleapis.com/language/translate/v2?key=${API_KEY}`;
-    try {
-      const response = await fetch(url, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          q: "",
-          target: "en",
-        }),
-      });
-      console.log(response);
-    } catch (err) {
-      console.error("Translation error:", err.message);
-    }
-  }});
+  API_KEY = apiInput.value;
+  const url = `https://translation.googleapis.com/language/translate/v2/languages?key=${API_KEY}`;
+  // TODO: Consider network error handling
+  const response = await fetch(url, {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  });
 
-document.getElementById("searchBox").addEventListener("input", () => {
-  const searchInput = document
-    .getElementById("searchBox")
-    .value.toLowerCase();
-  populateDropdown(toElem, searchInput, languages);
-});
-
-toElem.addEventListener("change", async () => {
-  browser.storage.local.set({ to: toElem.value });
-  selectedToLang = toElem.value;
-  const searchBox = document.getElementById("searchBox");
-  searchBox.value = "";
-  populateDropdown(toElem, "", languages);
+  // TODO: Consolidate this and the fetchAvailableLanguages function
+  if (response.ok) {
+    browser.storage.local.set({ apiKey: API_KEY });
+    languages = await response.json();
+    setupPopup(languages);
+  } else {
+    apiInput.style.border = "1px solid red";
+  }
 });
 
 
-function toggleSwitch() {
-  const button = document.getElementById("toggleSwitch");
-  const isChecked = button.checked;
-  browser.storage.local.set({ isChecked });
-}
+
 
 

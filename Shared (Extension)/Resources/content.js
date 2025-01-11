@@ -34,7 +34,7 @@ async function translateNestedText(element) {
       keepNextBr = false;
       translatedText = originalText;
     } else {
-
+      // TODO: Consider global langs variable that is set through changes in storage
       const langs = await browser.storage.local.get("to");
       to = langs.to;
       console.log("Translating to: ", to);
@@ -48,6 +48,8 @@ async function translateNestedText(element) {
 
 let prevText;
 async function runExtensionLogic() {
+  API_KEY = (await browser.storage.local.get("apiKey")).apiKey;
+  console.log("API_KEY:", API_KEY);
   const og_div = document.querySelector(".player-timedtext");
   const my_div_shell = document.querySelector(".nds-player-timedtext");
   if (my_div_shell) {
@@ -85,26 +87,27 @@ async function runExtensionLogic() {
         clonetainer.style.left = `${pos_percent}%`;
       }
     }
-  } else {
-    if (og_div) {
-      const my_div_shell = document.createElement("div");
-      my_div_shell.className = "nds-player-timedtext";
-      parentDiv = og_div.parentElement;
-      parentDiv.insertBefore(my_div_shell, og_div.nextSibling);
-    }
+  } else if (og_div) {
+    const my_div_shell = document.createElement("div");
+    my_div_shell.className = "nds-player-timedtext";
+    parentDiv = og_div.parentElement;
+    parentDiv.insertBefore(my_div_shell, og_div.nextSibling);
   }
 }
 
 console.log("Extension is loaded");
+let API_KEY;
 runExtensionLogic();
 const observer = new MutationObserver(() => {
   runExtensionLogic();
 });
-
+// TODO: Consider what happens when Toggle is switched off
+observer.observe(document.body, { childList: true, subtree: true });
 
 browser.storage.onChanged.addListener((changes, areaName) => {
-  const { isChecked } = changes;
+  const { isChecked, apiKey } = changes;
   const isEnabled = isChecked.newValue;
+  API_KEY = apiKey.newValue;
   if (areaName === "local") {
     if (isEnabled) {
       observer.observe(document.body, { childList: true, subtree: true });
