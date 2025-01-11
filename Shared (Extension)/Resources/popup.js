@@ -240,6 +240,7 @@ function populateDropdown(dropdown, filter = "", languages) {
   dropdown.value = selectedToLang;
 }
 
+
 async function setupPopup(languages) {
   apiContainer.style.display = "none";
   mainContainer.style.display = "block";
@@ -285,6 +286,7 @@ const mainContainer = document.getElementById("mainContainer");
 const apiInput = document.getElementById("apiInput");
 let languages;
 
+
 const langObj = await browser.storage.local.get("to");
 
 let selectedToLang;
@@ -324,8 +326,3 @@ apiKeySubmitButton.addEventListener("click", async () => {
     apiInput.style.border = "1px solid red";
   }
 });
-
-
-
-
-
