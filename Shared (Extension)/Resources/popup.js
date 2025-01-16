@@ -193,6 +193,59 @@ const isoLangs = {
   "zh-TW": "Traditional Chinese",
   zu: "Zulu",
 };
+
+// TODO: Consider getting only promises from storage
+let API_KEY = (await browser.storage.local.get("apiKey")).apiKey;
+let selectedToLang = (await browser.storage.local.get("to")).to;
+let isOn = (await browser.storage.local.get("isChecked")).isChecked;
+let languages;
+
+if (API_KEY) {
+  setupPopup();
+  showAPIcontainer();
+} else {
+  
+  showMainContainer();
+}
+
+
+
+if (langObj.to) {
+  selectedToLang = langObj.to;
+} else {
+  selectedToLang = "en";
+}
+
+const toggleButton = document.getElementById("toggleSwitch");
+const apiKeySubmitButton = document.getElementById("submitButton");
+const apiContainer = document.getElementById("apiContainer");
+const mainContainer = document.getElementById("mainContainer");
+const apiInput = document.getElementById("apiInput");
+
+
+
+
+apiKeySubmitButton.addEventListener("click", async () => {
+  API_KEY = apiInput.value;
+  const url = `https://translation.googleapis.com/language/translate/v2/languages?key=${API_KEY}`;
+  // TODO: Consider network error handling
+  const response = await fetch(url, {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  });
+
+  // TODO: Consolidate this and the fetchAvailableLanguages function
+  if (response.ok) {
+    browser.storage.local.set({ apiKey: API_KEY });
+    languages = await response.json();
+    setupPopup(languages);
+  } else {
+    apiInput.style.border = "1px solid red";
+  }
+});
+
+
+
 // TODO: Function needs to be double checked
 async function fetchAvailableLanguages(API_KEY) {
   const url = `https://translation.googleapis.com/language/translate/v2/languages?key=${API_KEY}`;
@@ -240,10 +293,8 @@ function populateDropdown(dropdown, filter = "", languages) {
   dropdown.value = selectedToLang;
 }
 
-
-async function setupPopup(languages) {
-  apiContainer.style.display = "none";
-  mainContainer.style.display = "block";
+async function setupPopup() {
+  const languages = (await fetchAvailableLanguages(API_KEY)).data;
   const toggleButton = document.getElementById("toggleSwitch");
   const toElem = document.getElementById("languageDropdown");
 
@@ -279,50 +330,13 @@ async function setupPopup(languages) {
   });
 }
 
-const toggleButton = document.getElementById("toggleSwitch");
-const apiKeySubmitButton = document.getElementById("submitButton");
-const apiContainer = document.getElementById("apiContainer");
-const mainContainer = document.getElementById("mainContainer");
-const apiInput = document.getElementById("apiInput");
-let languages;
 
-
-const langObj = await browser.storage.local.get("to");
-
-let selectedToLang;
-if (langObj.to) {
-  selectedToLang = langObj.to;
-} else {
-  selectedToLang = "en";
-}
-
-let API_KEY = (await browser.storage.local.get("apiKey")).apiKey;
-console.log("API_KEY", API_KEY);
-if (API_KEY) {
-  apiContainer.style.display = "none";
-  mainContainer.style.display = "block";
-  const languages = (await fetchAvailableLanguages(API_KEY)).data;
-  setupPopup(languages);
-}else{
+function showAPIcontainer() {
   apiContainer.style.display = "flex";
   mainContainer.style.display = "none";
 }
 
-apiKeySubmitButton.addEventListener("click", async () => {
-  API_KEY = apiInput.value;
-  const url = `https://translation.googleapis.com/language/translate/v2/languages?key=${API_KEY}`;
-  // TODO: Consider network error handling
-  const response = await fetch(url, {
-    method: "GET",
-    headers: { "Content-Type": "application/json" },
-  });
-
-  // TODO: Consolidate this and the fetchAvailableLanguages function
-  if (response.ok) {
-    browser.storage.local.set({ apiKey: API_KEY });
-    languages = await response.json();
-    setupPopup(languages);
-  } else {
-    apiInput.style.border = "1px solid red";
-  }
-});
+function showMainContainer() {
+  apiContainer.style.display = "none";
+  mainContainer.style.display = "block";
+}
