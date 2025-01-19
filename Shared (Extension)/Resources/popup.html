@@ -8,13 +8,13 @@
   </head>
   <body>
     <h2 style="color: #e50914">Netflix Dual Subtitles</h2>
-    <div id="apiContainer" style = "display: flex; align-items: center; gap: 10px">
+    <div id="apiKeyInputContainer" style = "display: flex; align-items: center; gap: 10px">
       <input
         type="text"
-        id="apiInput"
+        id="apiKeyInput"
         placeholder="Paste your API key here ..."
       />
-      <button id="submitButton">Submit</button>
+      <button id="apiKeySubmitButton">Submit</button>
     </div>
     <div id="mainContainer" style = "display: none;">
       <p>
@@ -24,6 +24,10 @@
           <span class="slider round"></span>
         </label>
       </p>
+      <p>
+        <span>Change API Key</span>
+        <button id="chageApiKeyButton">Change</button>
+      </p>
       <input
         type="text"
         id="searchBox"
@@ -31,8 +35,6 @@
       />
       <select id="languageDropdown" size="5" width="100%"></select>
     </div>
-    <div id="errorContainer" style = "display: none;">
-      <p id="errorText"></p>
     </div>
   </body>
 </html>

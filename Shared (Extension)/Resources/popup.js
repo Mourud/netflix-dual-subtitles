@@ -194,149 +194,87 @@ const isoLangs = {
   zu: "Zulu",
 };
 
-// TODO: Consider getting only promises from storage
-let API_KEY = (await browser.storage.local.get("apiKey")).apiKey;
-let selectedToLang = (await browser.storage.local.get("to")).to;
-let isOn = (await browser.storage.local.get("isChecked")).isChecked;
-let languages;
+initAPIKeyInputEventHandlers();
+initMainEventHandlers();
 
-if (API_KEY) {
-  setupPopup();
-  showAPIcontainer();
-} else {
-  
-  showMainContainer();
-}
-
-
-
-if (langObj.to) {
-  selectedToLang = langObj.to;
-} else {
-  selectedToLang = "en";
-}
-
-const toggleButton = document.getElementById("toggleSwitch");
-const apiKeySubmitButton = document.getElementById("submitButton");
-const apiContainer = document.getElementById("apiContainer");
-const mainContainer = document.getElementById("mainContainer");
-const apiInput = document.getElementById("apiInput");
-
-
-
-
-apiKeySubmitButton.addEventListener("click", async () => {
-  API_KEY = apiInput.value;
+async function fetchLanguages(API_KEY) {
   const url = `https://translation.googleapis.com/language/translate/v2/languages?key=${API_KEY}`;
-  // TODO: Consider network error handling
-  const response = await fetch(url, {
+  return fetch(url, {
     method: "GET",
     headers: { "Content-Type": "application/json" },
   });
-
-  // TODO: Consolidate this and the fetchAvailableLanguages function
-  if (response.ok) {
-    browser.storage.local.set({ apiKey: API_KEY });
-    languages = await response.json();
-    setupPopup(languages);
-  } else {
-    apiInput.style.border = "1px solid red";
-  }
-});
-
-
-
-// TODO: Function needs to be double checked
-async function fetchAvailableLanguages(API_KEY) {
-  const url = `https://translation.googleapis.com/language/translate/v2/languages?key=${API_KEY}`;
-  try {
-    const response = await fetch(url, {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    });
-    const res = await response.json();
-    return { data: res, error: null };
-  } catch (error) {
-    return { data: null, error: error.message };
-  }
 }
 
-function createErrorElement(error) {
-  const errorElement = document.createElement("div");
-  errorElement.textContent = error;
-  return errorElement;
+function switchView(from, to, displayStyle) {
+  document.getElementById(from).style = "display: none";
+  document.getElementById(to).style = `display: ${displayStyle}`;
 }
 
-function populateDropdown(dropdown, filter = "", languages) {
-  dropdown.innerHTML = "";
-  if (languages.error) {
-    console.error(languages.error);
-    const errorElement = createErrorElement(languages.error);
-    document.body.replaceChildren(errorElement);
-    return;
-  }
-  const selected = document.createElement("option");
-  selected.value = selectedToLang;
-  selected.textContent = "✓ " + isoLangs[selectedToLang];
-  dropdown.appendChild(selected);
+function initAPIKeyInputEventHandlers() {
+  const input = document.getElementById("apiKeyInput");
+  const submitButton = document.getElementById("apiKeySubmitButton");
 
-  Object.entries(languages.data.languages).forEach(([_, d]) => {
-    const code = d.language;
-    const lang = isoLangs[code];
-    if (lang.toLowerCase().includes(filter) && code !== selectedToLang) {
-      const option = document.createElement("option");
-      option.value = code;
-      option.textContent = lang;
-      dropdown.appendChild(option);
+  submitButton.addEventListener("click", handleAPIKey);
+
+  input.addEventListener("keyup", (event) => {
+    if (event.key === "Enter") {
+      handleAPIKey();
     }
   });
-  dropdown.value = selectedToLang;
-}
 
-async function setupPopup() {
-  const languages = (await fetchAvailableLanguages(API_KEY)).data;
-  const toggleButton = document.getElementById("toggleSwitch");
-  const toElem = document.getElementById("languageDropdown");
-
-  populateDropdown(toElem, "", languages);
-
-  const initialState = await browser.storage.local.get("isChecked");
-  if (initialState.isChecked) {
-    toggleButton.checked = initialState.isChecked;
-  } else {
-    toggleButton.checked = false;
-    browser.storage.local.set({ isChecked: false });
+  async function handleAPIKey() {
+    const apiKey = input.value;
+    const response = await fetchLanguages(apiKey);
+    if (response.ok) {
+      browser.storage.local.set({ apiKey }, () => {
+        console.log("API Key Set");
+      });
+      switchView("apiKeyInputContainer", "mainContainer", "block");
+    } else {
+      console.log("API Key Invalid");
+      input.style.border = "1px solid red";
+      // TODO: Add shake animation
+    }
   }
+}
 
-  toggleButton.addEventListener("change", () => {
-    const button = document.getElementById("toggleSwitch");
-    const isChecked = button.checked;
-    browser.storage.local.set({ isChecked });
+function initMainEventHandlers() {
+  const toggleSwitch = document.getElementById("ToggleSwitch");
+  const searchBox = document.getElementById("searchBox");
+  const languageDropdown = document.getElementById("languageDropdown");
+  const apiKeyInputButton = document.getElementById("changeApiKeyButton");
+
+  toggleSwitch.addEventListener("click", () => {
+    browser.storage.local.set({ extensionActive: toggleSwitch.checked }, () =>
+      console.log(`ndsActive set to ${toggleSwitch.checked}`)
+    );
   });
 
-  document.getElementById("searchBox").addEventListener("input", () => {
-    const searchInput = document
-      .getElementById("searchBox")
-      .value.toLowerCase();
-    populateDropdown(toElem, searchInput, languages);
+  searchBox.addEventListener("input", () => {
+    const input = searchBox.value.toLowerCase();
+
+    displayLanguageSelect((filter = input));
   });
 
-  toElem.addEventListener("change", async () => {
-    browser.storage.local.set({ to: toElem.value });
-    selectedToLang = toElem.value;
-    const searchBox = document.getElementById("searchBox");
+  languageDropdown.addEventListener("change", handleLanguageDropdown);
+
+  searchBox.addEventListener("keyup", (event) => {
+    if (event.key === "Enter") {
+      handleLanguageDropdown();
+    }
+  });
+
+  apiKeyInputButton.addEventListener("click", () => {
+    switchView("mainContainer", "apiKeyInputContainer", "flex");
+  });
+
+  function handleLanguageDropdown() {
+    browser.storage.local.set({ targetLanguage: languageDropdown.value }, () =>
+      console.log(`targetLanguage set to ${languageDropdown.value}`)
+    );
     searchBox.value = "";
-    populateDropdown(toElem, "", languages);
-  });
+    displayLanguageSelect();
+  }
 }
-
-
-function showAPIcontainer() {
-  apiContainer.style.display = "flex";
-  mainContainer.style.display = "none";
-}
-
-function showMainContainer() {
-  apiContainer.style.display = "none";
-  mainContainer.style.display = "block";
-}
+// TODO
+function displayLanguageSelect(response) {}
